@@ -1,5 +1,7 @@
 import time
 
+import part_of_gryadka
+import repka
 import wrap
 
 wrap.world.create_world(626, 352)
@@ -16,35 +18,30 @@ wrap.add_sprite_dir("sprite")
 # wrap.sprite.set_size_percent(block2, 140, 140)
 # wrap.sprite.set_size_percent(block3, 140, 140)
 # wrap.sprite.set_size_percent(block4, 140, 140)
+spisok_block=[]
 
-def add_block(x, y):
-    block = wrap.sprite.add("mario-scenery", x, y, "block")
-    wrap.sprite.set_size_percent(block, 140, 140)
+
 def block_row(x,y):
     for i in range(x,x+47*4,47):
-        add_block(i,y)
+        spisok_block.append(part_of_gryadka.create_block(i,y))
 block_row(50,315)
 block_row(260,233)
-
-
-
 
 
 
 spisok=[]
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def addition(pos_x, pos_y):
-    if wrap.sprite.is_collide_point(block,pos_x,pos_y):
-        repka = wrap.sprite.add("repka", x, y, "repka_bolshaya")
-        wrap.sprite.set_size_percent(repka, 40, 40)
-        spisok.append({"id": repka,"col":0,"size":40})
+    for i in spisok_block:
+        if wrap.sprite.is_collide_point(i["id"],pos_x,pos_y) and not i["busy"]:
+            x=wrap.sprite.get_x(i["id"])
+            y= wrap.sprite.get_y(i["id"])
+            i["busy"]=True
+            spisok.append(repka.create_repka(x,y))
 
 
 
 @wrap.always(1000)
 def resize():
     for i in spisok:
-        if i["col"]<5:
-            wrap.sprite.set_size_percent(i["id"], i["size"], i["size"])
-            i["size"] +=10
-            i["col"]+=1
+       repka.rost(i)
