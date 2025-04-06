@@ -21,13 +21,15 @@ wrap.add_sprite_dir("sprite")
 spisok_block=[]
 
 
-def block_row(x,y):
-    for i in range(x,x+47*4,47):
+def block_row(x,y,col):
+    for i in range(x,x+47*col,47):
         spisok_block.append(part_of_gryadka.create_block(i,y))
-block_row(50,315)
-block_row(260,233)
-
-
+block_row(50,315,4)
+block_row(260,233,4)
+block_row(50,233,4)
+block_row(260,315,4)
+block_row(473,233,3)
+block_row(473,315,3)
 
 
 spisok=[]
@@ -39,10 +41,23 @@ def addition(pos_x, pos_y):
             y= wrap.sprite.get_y(i["id"])
             i["busy"]=True
             spisok.append(repka.create_repka(x,y))
+            print(spisok)
+            break
+        else:
+            for i in spisok:
+                if wrap.sprite.is_collide_point(i["id"], pos_x, pos_y):
+                    wrap.sprite.remove(i["id"])
+                    spisok.remove(i)
+                    print(spisok)
 
-
+#@wrap.always(100)
+#def resize():
+ #  print(spisok)
 
 @wrap.always(1000)
 def resize():
     for i in spisok:
        repka.rost(i)
+
+
+
