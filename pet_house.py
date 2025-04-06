@@ -29,6 +29,7 @@ block_row(260,233)
 
 
 
+
 spisok=[]
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def addition(pos_x, pos_y):
