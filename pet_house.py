@@ -35,20 +35,24 @@ block_row(473,315,3)
 spisok=[]
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def addition(pos_x, pos_y):
+    for i in spisok:
+        if wrap.sprite.is_collide_point(i["id"], pos_x, pos_y):
+            wrap.sprite.remove(i["id"])
+            spisok.remove(i)
+
+
+
     for i in spisok_block:
         if wrap.sprite.is_collide_point(i["id"],pos_x,pos_y) and not i["busy"]:
             x=wrap.sprite.get_x(i["id"])
             y= wrap.sprite.get_y(i["id"])
             i["busy"]=True
             spisok.append(repka.create_repka(x,y))
-            print(spisok)
+
             break
-        else:
-            for i in spisok:
-                if wrap.sprite.is_collide_point(i["id"], pos_x, pos_y):
-                    wrap.sprite.remove(i["id"])
-                    spisok.remove(i)
-                    print(spisok)
+
+
+
 
 #@wrap.always(100)
 #def resize():
