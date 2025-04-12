@@ -39,15 +39,14 @@ def addition(pos_x, pos_y):
         if wrap.sprite.is_collide_point(i["id"], pos_x, pos_y):
             wrap.sprite.remove(i["id"])
             spisok.remove(i)
-
+            i["gryadka"]["busy"]=False
 
 
     for i in spisok_block:
         if wrap.sprite.is_collide_point(i["id"],pos_x,pos_y) and not i["busy"]:
-            x=wrap.sprite.get_x(i["id"])
-            y= wrap.sprite.get_y(i["id"])
+
             i["busy"]=True
-            spisok.append(repka.create_repka(x,y))
+            spisok.append(repka.create_repka(i))
 
             break
 

@@ -1,9 +1,11 @@
-
+import part_of_gryadka
 import wrap
-def create_repka(x,y):
+
+def create_repka(gryadka):
+    x,y=part_of_gryadka.get_xy(gryadka)
     repka = wrap.sprite.add("repka", x, y, "repka_bolshaya")
     wrap.sprite.set_size_percent(repka, 40, 40)
-    return {"id": repka, "col": 0, "size": 40}
+    return {"id": repka, "col": 0, "size": 40,"gryadka":gryadka}
 
 def rost(repka):
     if repka["col"] < 5:
