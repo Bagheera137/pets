@@ -9,15 +9,6 @@ wrap.world.set_back_image("img.png")
 wrap.add_sprite_dir("sprite")
 
 
-# block1=wrap.sprite.add("mario-scenery",50,315,"block")
-# block2=wrap.sprite.add("mario-scenery",97,315,"block")
-# block3=wrap.sprite.add("mario-scenery",143,315,"block")
-# block4=wrap.sprite.add("mario-scenery",190,315,"block")
-#
-# wrap.sprite.set_size_percent(block1, 140, 140)
-# wrap.sprite.set_size_percent(block2, 140, 140)
-# wrap.sprite.set_size_percent(block3, 140, 140)
-# wrap.sprite.set_size_percent(block4, 140, 140)
 spisok_block=[]
 
 
@@ -35,22 +26,26 @@ block_row(473,315,3)
 spisok=[]
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def addition(pos_x, pos_y):
+    rep=find_repka(pos_x,pos_y)
+    if rep:
+        repka.collection_repka(rep)
+        spisok.remove(rep)
+
+
+    gryadka=find_free_gryadka(pos_x,pos_y)
+    if gryadka:
+        spisok.append(repka.create_repka(gryadka))
+
+
+def find_repka(pos_x,pos_y):
     for i in spisok:
         if wrap.sprite.is_collide_point(i["id"], pos_x, pos_y):
-            wrap.sprite.remove(i["id"])
-            spisok.remove(i)
-            i["gryadka"]["busy"]=False
+            return i
 
-
+def find_free_gryadka(pos_x,pos_y):
     for i in spisok_block:
-        if wrap.sprite.is_collide_point(i["id"],pos_x,pos_y) and not i["busy"]:
-
-            i["busy"]=True
-            spisok.append(repka.create_repka(i))
-
-            break
-
-
+        if wrap.sprite.is_collide_point(i["id"], pos_x, pos_y) and not i["busy"]:
+            return i
 
 
 #@wrap.always(100)
