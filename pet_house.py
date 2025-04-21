@@ -28,13 +28,14 @@ spisok=[]
 def addition(pos_x, pos_y):
     rep=find_repka(pos_x,pos_y)
     if rep:
-        repka.collection_repka(rep)
-        spisok.remove(rep)
+        if rep["col"]==5:
+            repka.collection_repka(rep)
+            spisok.remove(rep)
 
-
-    gryadka=find_free_gryadka(pos_x,pos_y)
-    if gryadka:
-        spisok.append(repka.create_repka(gryadka))
+    else:
+        gryadka=find_free_gryadka(pos_x,pos_y)
+        if gryadka:
+            spisok.append(repka.create_repka(gryadka))
 
 
 def find_repka(pos_x,pos_y):
