@@ -14,6 +14,9 @@ def rost(repka):
         repka["size"] += 10
         repka["col"] += 1
 
+
 def collection_repka(rep):
-    wrap.sprite.remove(rep["id"])
-    rep["gryadka"]["busy"] = False
+    if rep["col"] == 5:
+        wrap.sprite.remove(rep["id"])
+        rep["gryadka"]["busy"] = False
+        return True
