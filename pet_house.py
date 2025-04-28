@@ -7,8 +7,8 @@ import wrap
 wrap.world.create_world(626, 352)
 wrap.world.set_back_image("img.png")
 wrap.add_sprite_dir("sprite")
-text=wrap.sprite.add_text("0",600,25,font_size=40,text_color=[255,0,4])
-col_money=0
+text=wrap.sprite.add_text("10",600,25,font_size=40,text_color=[255,0,4])
+col_money=10
 
 spisok_block=[]
 
@@ -32,12 +32,13 @@ def addition(pos_x, pos_y):
         spisok.remove(rep)
         col_money=col_money+10
         wrap.sprite_text.set_text(text,str(col_money))
-        print(text)
+
     else:
         gryadka=find_free_gryadka(pos_x,pos_y)
-        if gryadka:
+        if gryadka and col_money>=3:
             spisok.append(repka.create_repka(gryadka))
-
+            col_money=col_money-3
+            wrap.sprite_text.set_text(text, str(col_money))
 
 def find_repka(pos_x,pos_y):
     for i in spisok:
