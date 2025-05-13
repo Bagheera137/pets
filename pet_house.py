@@ -1,5 +1,7 @@
 import time
 
+import shop
+
 import part_of_gryadka
 import repka
 import wrap
@@ -11,7 +13,6 @@ text=wrap.sprite.add_text("10",600,25,font_size=40,text_color=[255,0,4])
 col_money=10
 level=0
 spisok_block=[]
-spisok_icon=[]
 
 def block_row(x,y,col):
     for i in range(x,x+47*col,47):
@@ -22,7 +23,7 @@ block_row(50,233,4)
 block_row(260,315,4)
 block_row(473,233,3)
 block_row(473,315,3)
-
+spisok_icon=[]
 spisok=[]
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def addition(pos_x, pos_y):
@@ -56,24 +57,13 @@ def resize():
        repka.rost(i)
 
 def money():
-    global level
+    global level, spisok_icon
     if col_money>=11 and level==0:
         level=level+1
-        repka_icon = wrap.sprite.add("repka", 200, 20, "repka_bolshaya")
-        wrap.sprite.set_size_percent(repka_icon, 30, 30)
-        spisok_icon.append(repka_icon)
-
-        strawberry_icon=wrap.sprite.add("repka", 240,20,"strawberry")
-        wrap.sprite.set_size_percent(strawberry_icon,220,220)
-        spisok_icon.append(strawberry_icon)
+        spisok_icon=shop.creating_shop()
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def choice_plant(pos_x,pos_y):
-    for i in spisok_icon:
-        if wrap.sprite.is_collide_point(i, pos_x, pos_y):
-            x=wrap.sprite.get_x(i)
-            y=wrap.sprite.get_y(i)
-            bottom=wrap.sprite.get_bottom(i)
-            wrap.sprite.add_text("____", x,bottom , font_size=20, text_color=[255, 0, 4])
+    shop.product_selection(spisok_icon,pos_x,pos_y)
 
 
 
