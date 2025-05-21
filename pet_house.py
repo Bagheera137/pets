@@ -1,3 +1,4 @@
+import random
 import time
 
 import shop
@@ -13,6 +14,8 @@ text=wrap.sprite.add_text("10",600,25,font_size=40,text_color=[255,0,4])
 col_money=10
 level=0
 spisok_block=[]
+tomato="tomato"
+repka_bolshaya="repka_bolshaya"
 
 def block_row(x,y,col):
     for i in range(x,x+47*col,47):
@@ -23,7 +26,7 @@ block_row(50,233,4)
 block_row(260,315,4)
 block_row(473,233,3)
 block_row(473,315,3)
-spisok_icon=[]
+
 spisok=[]
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def addition(pos_x, pos_y):
@@ -37,7 +40,9 @@ def addition(pos_x, pos_y):
     else:
         gryadka=find_free_gryadka(pos_x,pos_y)
         if gryadka and col_money>=3:
-            spisok.append(repka.create_repka(gryadka))
+            product=random.choice([tomato,repka_bolshaya])
+            spisok.append(repka.create_repka(gryadka,product))
+            print(spisok)
             col_money=col_money-3
             wrap.sprite_text.set_text(text, str(col_money))
 
@@ -57,13 +62,13 @@ def resize():
        repka.rost(i)
 
 def money():
-    global level, spisok_icon
+    global level
     if col_money>=11 and level==0:
         level=level+1
-        spisok_icon=shop.creating_shop()
+        spisok_icon=shop.addition_products()
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def choice_plant(pos_x,pos_y):
-    shop.product_selection(spisok_icon,pos_x,pos_y)
+    shop.product_selection(pos_x,pos_y)
 
 
 
