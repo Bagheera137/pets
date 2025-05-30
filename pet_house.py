@@ -14,7 +14,7 @@ text=wrap.sprite.add_text("10",600,25,font_size=40,text_color=[255,0,4])
 col_money=10
 level=0
 spisok_block=[]
-tomato="tomato"
+tomato="grape"
 repka_bolshaya="repka_bolshaya"
 
 def block_row(x,y,col):

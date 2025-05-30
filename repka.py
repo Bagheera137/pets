@@ -17,12 +17,12 @@ def calculation(product,gryadka):
     wid_p=wrap.sprite.get_width(product)
     heig_p = wrap.sprite.get_height(product)
 
-    width_product=(heig_p*width)/height
-    height_product=(wid_p*height)/width
-    st=heig_p/wid_p
-    h_r=width*st
-    return width, h_r
-
+    h_p=(heig_p*width)/wid_p
+    if h_p<2*height:
+        return width,h_p
+    else:
+        w_p=(wid_p*height*2)/heig_p
+        return w_p,height*2
 
 
 def rost(repka):
