@@ -17,6 +17,7 @@ spisok_block=[]
 tomato="grape"
 repka_bolshaya="repka_bolshaya"
 
+
 def block_row(x,y,col):
     for i in range(x,x+47*col,47):
         spisok_block.append(part_of_gryadka.create_block(i,y))
@@ -31,6 +32,7 @@ spisok=[]
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def addition(pos_x, pos_y):
     global text, col_money
+    print("ghj")
     rep=find_repka(pos_x,pos_y)
     if rep and repka.collection_repka(rep):
         spisok.remove(rep)
@@ -40,8 +42,7 @@ def addition(pos_x, pos_y):
     else:
         gryadka=find_free_gryadka(pos_x,pos_y)
         if gryadka and col_money>=3:
-            product=random.choice([tomato,repka_bolshaya])
-            spisok.append(repka.create_repka(gryadka,product))
+            spisok.append(repka.create_repka(gryadka,shop.product))
             print(spisok)
             col_money=col_money-3
             wrap.sprite_text.set_text(text, str(col_money))
@@ -69,6 +70,7 @@ def money():
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def choice_plant(pos_x,pos_y):
     shop.product_selection(pos_x,pos_y)
+
 
 
 
