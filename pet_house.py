@@ -57,7 +57,7 @@ def find_free_gryadka(pos_x,pos_y):
         if wrap.sprite.is_collide_point(i["id"], pos_x, pos_y) and not i["busy"]:
             return i
 
-@wrap.always(1000)
+@wrap.always(3000)
 def resize():
     for i in spisok:
        repka.rost(i)

@@ -6,10 +6,10 @@ def create_repka(gryadka,product):
     bottom=wrap.sprite.get_bottom(gryadka["id"])
     p= wrap.sprite.add("repka", x, y, product)
     a,b=calculation(p,gryadka["id"])
-    wrap.sprite.set_size(p, a, b)
+    wrap.sprite.set_size(p, 0, 0)
     wrap.sprite.move_bottom_to(p,bottom)
     gryadka["busy"]=True
-    return {"id": p, "col": 0, "width":a ,"height":b ,"gryadka":gryadka}
+    return {"id": p, "col": 0, "width":0 ,"height":0 ,"gryadka":gryadka,"final_width":a,"final_height":b}
 
 def calculation(product,gryadka):
     width = wrap.sprite.get_width(gryadka)
@@ -31,10 +31,12 @@ def rost(repka):
     height=wrap.sprite.get_height(repka["gryadka"]["id"])
 
     if repka["col"] < 5 :
-        #wrap.sprite.set_size(repka["id"], repka["width"], repka["height"])
-        #repka["width"] += 8
-        #repka["height"] += 8
+        w=repka["final_width"]/5
+        h=repka["final_height"]/5
+        repka["width"] += w
+        repka["height"] += h
         repka["col"] += 1
+        wrap.sprite.set_size(repka["id"], repka["width"], repka["height"])
         bottom = wrap.sprite.get_bottom(repka["gryadka"]["id"])
         wrap.sprite.move_bottom_to(repka["id"], bottom)
 
